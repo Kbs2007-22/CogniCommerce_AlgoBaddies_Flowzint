@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════
+   FlowZint — Global CSS | Design Tokens + Reset
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Design Tokens ───────────────────────────────────── */
+:root {
+  /* Core palette */
+  --bg:          #060a10;
+  --bg-panel:    #0d1520;
+  --bg-alt:      #111c2a;
+  --bg-input:    #0a1118;
+
+  --accent:      #00d4ff;
+  --accent-dim:  rgba(0, 212, 255, 0.10);
+  --accent-glow: rgba(0, 212, 255, 0.30);
+  --violet:      #b44cf0;
+  --violet-dim:  rgba(180, 76, 240, 0.12);
+  --violet-glow: rgba(180, 76, 240, 0.30);
+  --green:       #39ff6e;
+  --green-dim:   rgba(57, 255, 110, 0.12);
+  --green-glow:  rgba(57, 255, 110, 0.28);
+  --red:         #ff3a5c;
+  --red-dim:     rgba(255, 58, 92, 0.12);
+  --red-glow:    rgba(255, 58, 92, 0.28);
+  --amber:       #ffb830;
+  --amber-dim:   rgba(255, 184, 48, 0.12);
+
+  /* Borders */
+  --border:      rgba(0, 212, 255, 0.14);
+  --border-strong: rgba(0, 212, 255, 0.38);
+  --border-input: rgba(0, 212, 255, 0.22);
+
+  /* Text */
+  --txt:         #d8eaf5;
+  --txt-sub:     #6a8aa8;
+  --txt-muted:   #344d63;
+  --txt-inv:     #060a10;
+
+  /* Fonts */
+  --f-display: 'Orbitron', sans-serif;
+  --f-label:   'Rajdhani', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'JetBrains Mono', monospace;
+
+  /* Layout */
+  --topbar-h:  60px;
+  --sidebar-w: 60px;
+
+  /* Motion */
+  --ease-fast: 140ms ease;
+  --ease-med:  260ms cubic-bezier(.4,0,.2,1);
+  --ease-slow: 440ms cubic-bezier(.4,0,.2,1);
+
+  /* Status colours */
+  --status-open:     var(--accent);
+  --status-approved: var(--green);
+  --status-rejected: var(--red);
+  --status-resolved: var(--violet);
+}
+
+/* ── Reset ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; width: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid texture overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+input, select, textarea { font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Focus ring ──────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+/* ── Angled clip-path helper ─────────────────────────── */
+.clip-sm  { clip-path: polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px),  calc(100% - 8px)  100%, 0 100%); }
+.clip-md  { clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+.clip-lg  { clip-path: polygon(0 16px, 16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+
+/* ── Utility ─────────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes scanSweep {
+  0%   { top: -4px; opacity: 0; }
+  8%   { opacity: .7; }
+  92%  { opacity: .7; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes pulseGlow {
+  0%,100% { opacity: .55; }
+  50%      { opacity: 1; }
+}
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateX(24px); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
