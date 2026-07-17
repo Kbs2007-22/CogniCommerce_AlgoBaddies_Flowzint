@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { refundsApi } from '../api/client.js'
 
 const SEED_USERS = [
-  { label: 'VIP Buyer (trusted, high spend)',  email: 'vip_buyer@example.com' },
+  { label: 'VIP Buyer (trusted, high spend)', email: 'vip_buyer@example.com' },
   { label: 'Risk Buyer (untrusted, low spend)', email: 'risk_buyer@example.com' },
 ]
 
 function DecisionBadge({ decision }) {
   const map = {
-    AUTO_APPROVED:          { color: 'var(--green)',  icon: '✓' },
-    ESCALATE_TO_HUMAN:      { color: 'var(--red)',    icon: '⚠' },
+    AUTO_APPROVED: { color: 'var(--green)', icon: '✓' },
+    ESCALATE_TO_HUMAN: { color: 'var(--red)', icon: '⚠' },
     STANDARD_RETURN_REQUIRED: { color: 'var(--accent)', icon: '↩' },
   }
   const cfg = map[decision] || { color: 'var(--txt-sub)', icon: '?' }
@@ -150,7 +150,7 @@ function RefundPanel({ toast }) {
               Policy Rules
             </div>
             {[
-              ['AUTO_APPROVED', 'var(--green)',  'High trust score + non-returnable → instant credit, keep item'],
+              ['AUTO_APPROVED', 'var(--green)', 'High trust score + non-returnable → instant credit, keep item'],
               ['ESCALATE_TO_HUMAN', 'var(--red)', 'Low trust or flagged + non-returnable → human review queue'],
               ['STANDARD_RETURN_REQUIRED', 'var(--accent)', 'Standard item → normal return window, ship back required'],
             ].map(([k, c, desc]) => (

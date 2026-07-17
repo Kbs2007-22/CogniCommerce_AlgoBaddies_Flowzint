@@ -31,7 +31,8 @@ export const deliveryApi = {
   verifyLocation: (body) => http.post('/api/delivery/verify-location', body),
 }
 
-/* ── Health check ────────────────────────────────────── */
+/* ── Health check — uses /api which is proxied ────────── */
 export const healthApi = {
-  ping: () => http.get('/'),
+  /** Pings analytics status to check backend connectivity */
+  ping: () => http.get('/api/analytics/status'),
 }
